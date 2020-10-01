@@ -1,0 +1,66 @@
+﻿@model IEnumerable<SmartPhones.Models.Lab>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Labs";
+}
+@if (SignInManager.IsSignedIn(User))
+{
+    <h1>Labs</h1>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+               
+                <th>
+                    @Html.DisplayNameFor(model => model.MobileModel)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fault)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ExpectedRepairDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsRepairable)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsDeadCondition)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MobileModel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fault)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ExpectedRepairDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsRepairable)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsDeadCondition)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Create", new { item.LabId,item.MobileModel,item.Fault,item.ExpectedRepairDate,item.IsRepairable,item.IsDeadCondition/* id=item.PrimaryKey */ }) 
+                        @Html.ActionLink("Delete", "Delete", new { id=item.LabId/* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

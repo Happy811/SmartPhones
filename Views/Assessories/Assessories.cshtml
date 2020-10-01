@@ -1,0 +1,74 @@
+﻿@model IEnumerable<SmartPhones.Models.Assessory>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Assessories";
+}
+@if (SignInManager.IsSignedIn(User))
+{
+
+    <h1>Assessories</h1>
+
+   
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Company)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Genuine)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Copy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Stock)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Company)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Genuine)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Copy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Stock)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Create", new { item.AssID, item.Name, item.Company, item.Price, item.Genuine, item.Copy, item.Stock /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.AssID/* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

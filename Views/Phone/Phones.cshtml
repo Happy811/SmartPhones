@@ -1,0 +1,69 @@
+﻿@model IEnumerable<SmartPhones.Models.SmartPhoneModel>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Phones";
+}
+@if (SignInManager.IsSignedIn(User))
+{
+    <h1>Phones</h1>
+
+    <p>
+        <a asp-action="Create">New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Storage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RAM)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Storage)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RAM)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Create", new { item.PhoneId, item.Title, item.Storage, item.RAM, item.Price }) |
+
+                        @Html.ActionLink("Delete", "Delete", new { id = item.PhoneId })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    
+}
